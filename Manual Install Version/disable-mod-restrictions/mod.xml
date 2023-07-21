@@ -1,0 +1,4 @@
+<Mod
+    name="Disable mod restrictions"
+    description="Disable several mod checks"
+    request_no_api_restrictions="1" />
