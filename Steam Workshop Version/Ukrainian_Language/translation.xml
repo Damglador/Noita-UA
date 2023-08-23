@@ -8,7 +8,7 @@
 	fonts_utf8="1"
 	fonts_pixel_font="1"
 	ui_action_info_offset2="35"
-	ui_wand_info_offset1="40"
-	ui_wand_info_offset2="50"
+	ui_wand_info_offset1="20"
+	ui_wand_info_offset2="35"
 >
 </Language>
