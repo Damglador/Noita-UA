@@ -1,7 +1,10 @@
 ## Інформація
 Створення моду, затвердження перекладу, шрифти: Damglador
+
 Переклад тексту: Damglador та Age_of_Dragons
+
 Допомога з імплементацією шрифтів у Steam версії: dextercd
+
 Створення нормальної підтримки перекладів у своїй грі: Nolla Games <3
 ## Встановлення
 Якщо у вас є гра в Steam вам туди - https://steamcommunity.com/sharedfiles/filedetails/?id=2921365704
