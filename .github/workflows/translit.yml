@@ -3,8 +3,6 @@ name: Noita-UA Translit (Mint Build)
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'Translation Files/**'
 
 jobs:
   transliterate:
