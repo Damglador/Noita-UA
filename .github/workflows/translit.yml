@@ -22,10 +22,9 @@ jobs:
       - name: Run Translit
         run: |
           chmod +x .github/bin/dstu9112
-          
           find "Translation Files" -type f \( -name "*.txt" -o -name "*.xml" -o -name "*.csv" \) | while read file; do
             echo "Processing $file..."
-            ./.github/bin/dstu9112 "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
+            ./.github/bin/dstu9112 < "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
           done
 
       - name: Commit to Latyn Branch
