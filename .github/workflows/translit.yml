@@ -1,0 +1,38 @@
+name: Noita-UA Translit to Latyn
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Translation Files/**'
+
+jobs:
+  transliterate:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run DSTU Translit
+        run: |
+          chmod +x .github/bin/dstu9112
+          
+          find "Translation Files" -type f \( -name "*.txt" -o -name "*.xml" -o -name "*.csv" \) | while read file; do
+            echo "Transliterating $file..."
+            
+            ./.github/bin/dstu9112 "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+          done
+
+      - name: Commit to Latyn Branch
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: auto-transliteration of Noita translation [skip ci]"
+          branch: latyn
+          create_branch: true
+          push_options: '--force'
