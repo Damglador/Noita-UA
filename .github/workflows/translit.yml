@@ -1,4 +1,4 @@
-name: Noita-UA Translit (Nix 25.11)
+name: Noita-UA Translit (Mint Build)
 
 on:
   push:
@@ -9,28 +9,24 @@ on:
 jobs:
   transliterate:
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Install Nix
-        uses: cachix/install-nix-action@v27
         with:
-          install_url: https://nixos.org/nix/install
-          nix_path: nixpkgs=channel:nixos-25.11
+          fetch-depth: 0
 
-      - name: Run DSTU Translit
-        env:
-          NIXPKGS_ALLOW_UNFREE: 1
+      - name: Run Translit
         run: |
           chmod +x .github/bin/dstu9112
           
-          nix-shell -p steam-run --run "
-            find 'Translation Files' -type f \( -name '*.txt' -o -name '*.xml' -o -name '*.csv' \) | while read file; do
-              echo \"Обробка \$file...\"
-              steam-run ./.github/bin/dstu9112 \"\$file\" > \"\$file.tmp\" && mv \"\$file.tmp\" \"\$file\"
-            done
-          "
+          find "Translation Files" -type f \( -name "*.txt" -o -name "*.xml" -o -name "*.csv" \) | while read file; do
+            echo "Processing $file..."
+            ./.github/bin/dstu9112 "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
+          done
 
       - name: Commit to Latyn Branch
         uses: stefanzweifel/git-auto-commit-action@v5
