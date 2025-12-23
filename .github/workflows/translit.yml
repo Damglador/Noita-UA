@@ -20,6 +20,8 @@ jobs:
           nix_path: nixpkgs=channel:nixos-25.11
 
       - name: Run DSTU Translit
+        env:
+          NIXPKGS_ALLOW_UNFREE: 1
         run: |
           chmod +x .github/bin/dstu9112
           
