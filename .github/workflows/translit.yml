@@ -1,4 +1,4 @@
-name: Noita-UA Translit to Latyn
+name: Noita-UA Translit (Nix-based)
 
 on:
   push:
@@ -9,30 +9,30 @@ on:
 jobs:
   transliterate:
     runs-on: ubuntu-latest
-    
-    permissions:
-      contents: write
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v22
         with:
-          fetch-depth: 0
+          nix_path: nixpkgs=channel:nixos-unstable
 
       - name: Run DSTU Translit
         run: |
           chmod +x .github/bin/dstu9112
-          
-          find "Translation Files" -type f \( -name "*.txt" -o -name "*.xml" -o -name "*.csv" \) | while read file; do
-            echo "Transliterating $file..."
-            
-            ./.github/bin/dstu9112 "$file" > "$file.tmp" && mv "$file.tmp" "$file"
-          done
+
+          nix-shell -p steam-run --run "
+            find 'Translation Files' -type f \( -name '*.txt' -o -name '*.xml' -o -name '*.csv' \) | while read file; do
+              echo \"Processing \$file...\"
+              steam-run ./.github/bin/dstu9112 \"\$file\" > \"\$file.tmp\" && mv \"\$file.tmp\" \"\$file\"
+            done
+          "
 
       - name: Commit to Latyn Branch
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "style: auto-transliteration of Noita translation [skip ci]"
+          commit_message: "style: auto-transliteration (latyn) [skip ci]"
           branch: latyn
           create_branch: true
           push_options: '--force'
