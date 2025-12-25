@@ -1,34 +1,15 @@
-name: "DSTU 9112:2021 Translit"
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  transliterate:
-    runs-on: ubuntu-latest
-    
-    permissions:
-      contents: write
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Run Translit
+- name: Run Translit
         run: |
           chmod +x .github/bin/dstu9112
           
-          echo "Processing file contents..."
+          echo "Processing text contents..."
           find . -type f -not -path '*/.*' \
           \( -name "*.csv" -o -name "*.xml" -o -name "*.txt" -o -name "*.lua" -o -name "*.md" -o -name "*.json" -o -name "*.locale" \) \
           ! -name "dstu9112" | while read file; do
             ./.github/bin/dstu9112 < "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
           done
 
-          echo "Renaming files and directories..."
+          echo "Renaming all files and directories..."
           find . -depth -not -path '*/.*' ! -name "dstu9112" ! -name "." | while read path; do
             dir=$(dirname "$path")
             base=$(basename "$path")
@@ -47,4 +28,5 @@ jobs:
           commit_message: "avtomatyčna transliteracija"
           branch: latyn
           create_branch: true
-          push_options: '--force'
+          file_pattern: '.' 
+          push_options: ''
