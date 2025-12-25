@@ -21,10 +21,11 @@ jobs:
         run: |
           git fetch origin main
           
-          git checkout origin/main -- .github/bin/dstu9112
+          git checkout -f origin/main -- .github/bin/dstu9112
           chmod +x .github/bin/dstu9112
 
-          git checkout origin/main -- "*.csv" "*.xml" "*.txt" "*.lua" "*.md" "*.json" "*.locale" || echo "Files sync warning"
+          git checkout -f origin/main -- "*.csv" "*.xml" "*.txt" "*.lua" "*.md" "*.json" "*.locale" || echo "Warning"
+          git reset --mixed HEAD
 
           find . -type f -not -path '*/.*' \
           \( -name "*.csv" -o -name "*.xml" -o -name "*.txt" -o -name "*.lua" -o -name "*.md" -o -name "*.json" -o -name "*.locale" \) \
