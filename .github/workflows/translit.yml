@@ -24,7 +24,9 @@ jobs:
           git checkout origin/main -- .github/bin/dstu9112
           chmod +x .github/bin/dstu9112
 
-          git checkout origin/main -- "**/*.csv" "**/*.xml" "**/*.txt" "**/*.lua" "**/*.md" "**/*.json" "**/*.locale" || echo "Warning: Some files not found"
+          find . -type f \( -name "*.csv" -o -name "*.xml" -o -name "*.txt" -o -name "*.lua" -o -name "*.md" -o -name "*.json" -o -name "*.locale" \) -delete
+
+          git checkout origin/main -- .
           
           git reset
 
