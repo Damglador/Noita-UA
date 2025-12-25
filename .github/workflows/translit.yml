@@ -15,13 +15,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: latyn
+          fetch-depth: 0
 
       - name: Sync and Translit Texts
         run: |
+          git fetch origin main
+
+          git checkout origin/main -- .github/bin/dstu9112
           chmod +x .github/bin/dstu9112
 
-          git checkout origin/main -- "*.csv" "*.xml" "*.txt" "*.lua" "*.md" "*.json" "*.locale"
+          git checkout origin/main -- "*.csv" "*.xml" "*.txt" "*.lua" "*.md" "*.json" "*.locale" || echo "Some files not found"
 
+          echo "Processing contents..."
           find . -type f -not -path '*/.*' \
           \( -name "*.csv" -o -name "*.xml" -o -name "*.txt" -o -name "*.lua" -o -name "*.md" -o -name "*.json" -o -name "*.locale" \) \
           ! -name "dstu9112" | while read file; do
