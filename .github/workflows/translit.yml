@@ -7,45 +7,41 @@ on:
 jobs:
   transliterate:
     runs-on: ubuntu-latest
-    
     permissions:
       contents: write
 
     steps:
-      - name: Checkout code
+      - name: Checkout latyn branch
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: latyn
 
-      - name: Run Translit
+      - name: Sync and Translit Texts
         run: |
           chmod +x .github/bin/dstu9112
-          
-          echo "Processing text contents..."
+
+          git checkout origin/main -- "*.csv" "*.xml" "*.txt" "*.lua" "*.md" "*.json" "*.locale"
+
           find . -type f -not -path '*/.*' \
           \( -name "*.csv" -o -name "*.xml" -o -name "*.txt" -o -name "*.lua" -o -name "*.md" -o -name "*.json" -o -name "*.locale" \) \
           ! -name "dstu9112" | while read file; do
             ./.github/bin/dstu9112 < "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
           done
 
-          echo "Renaming all files and directories..."
-          find . -depth -not -path '*/.*' ! -name "dstu9112" ! -name "." | while read path; do
+          echo "Renaming text files only..."
+          find . -type f \( -name "*.csv" -o -name "*.xml" -o -name "*.txt" -o -name "*.lua" -o -name "*.md" -o -name "*.json" -o -name "*.locale" \) | while read path; do
             dir=$(dirname "$path")
             base=$(basename "$path")
-            
             new_base=$(echo -n "$base" | ./.github/bin/dstu9112)
-            
             if [ "$base" != "$new_base" ]; then
               mv "$path" "$dir/$new_base"
-              echo "Renamed: $path -> $dir/$new_base"
             fi
           done
 
-      - name: Commit to Latyn Branch
+      - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "avtomatyčna transliteracija"
           branch: latyn
-          create_branch: true
-          file_pattern: '.' 
+          commit_message: "avtomatyčna transliteracija"
+          file_pattern: '.'
           push_options: ''
