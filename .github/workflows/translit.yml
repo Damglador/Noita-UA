@@ -21,10 +21,10 @@ jobs:
         run: |
           git fetch origin main
           
-          git checkout -f origin/main -- .github/bin/dstu9112
+          git checkout origin/main -- .github/bin/dstu9112
           chmod +x .github/bin/dstu9112
 
-          git checkout -f origin/main -- "*.csv" "*.xml" "*.txt" "*.lua" "*.md" "*.json" "*.locale" || echo "Warning"
+          git checkout origin/main -- "**/*.csv" "**/*.xml" "**/*.txt" "**/*.lua" "**/*.md" "**/*.json" "**/*.locale" || echo "Warning: Some files not found"
           
           git reset
 
