@@ -1,4 +1,23 @@
-- name: Run Translit
+name: "DSTU 9112:2021 Translit"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  transliterate:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Translit
         run: |
           chmod +x .github/bin/dstu9112
           
