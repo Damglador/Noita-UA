@@ -20,20 +20,18 @@ jobs:
       - name: Sync and Translit Texts
         run: |
           git fetch origin main
-
+          
           git checkout origin/main -- .github/bin/dstu9112
           chmod +x .github/bin/dstu9112
 
-          git checkout origin/main -- "*.csv" "*.xml" "*.txt" "*.lua" "*.md" "*.json" "*.locale" || echo "Some files not found"
+          git checkout origin/main -- "*.csv" "*.xml" "*.txt" "*.lua" "*.md" "*.json" "*.locale" || echo "Files sync warning"
 
-          echo "Processing contents..."
           find . -type f -not -path '*/.*' \
           \( -name "*.csv" -o -name "*.xml" -o -name "*.txt" -o -name "*.lua" -o -name "*.md" -o -name "*.json" -o -name "*.locale" \) \
           ! -name "dstu9112" | while read file; do
             ./.github/bin/dstu9112 < "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
           done
 
-          echo "Renaming text files only..."
           find . -type f \( -name "*.csv" -o -name "*.xml" -o -name "*.txt" -o -name "*.lua" -o -name "*.md" -o -name "*.json" -o -name "*.locale" \) | while read path; do
             dir=$(dirname "$path")
             base=$(basename "$path")
@@ -42,6 +40,8 @@ jobs:
               mv "$path" "$dir/$new_base"
             fi
           done
+
+          rm -rf .github/bin/
 
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
