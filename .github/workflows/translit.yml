@@ -25,7 +25,8 @@ jobs:
           chmod +x .github/bin/dstu9112
 
           git checkout -f origin/main -- "*.csv" "*.xml" "*.txt" "*.lua" "*.md" "*.json" "*.locale" || echo "Warning"
-          git reset --mixed HEAD
+          
+          git reset
 
           find . -type f -not -path '*/.*' \
           \( -name "*.csv" -o -name "*.xml" -o -name "*.txt" -o -name "*.lua" -o -name "*.md" -o -name "*.json" -o -name "*.locale" \) \
@@ -43,6 +44,7 @@ jobs:
           done
 
           rm -rf .github/bin/
+          git add -A
 
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -50,4 +52,4 @@ jobs:
           branch: latyn
           commit_message: "avtomatyčna transliteracija"
           file_pattern: '.'
-          push_options: ''
+          skip_dirty_check: true
