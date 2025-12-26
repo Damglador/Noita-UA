@@ -1,57 +1,141 @@
-name: "DSTU 9112:2021 Translit"
+name: DSTU 9112:2021 Transliteration
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+    paths:
+      - 'translation.csv'
+      - 'README.md'
+      - 'Translation Files/translation_org.csv'
+      - 'Translation Files/translation.csv'
+      - 'Steam Workshop Version/Ukrainian_Language/translation.csv'
+      - 'Manual Install Version/Ukrainian_Language/translation.csv'
+      - 'Manual Install Version/Ukrainian_Language/translation.xml'
 
 jobs:
   transliterate:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
+    
     steps:
-      - name: Checkout latyn branch
+      - name: Checkout main branch
         uses: actions/checkout@v4
         with:
-          ref: latyn
           fetch-depth: 0
 
-      - name: Sync and Translit Texts
+      - name: Setup dstu9112 transliterator
         run: |
-          git fetch origin main
-          
-          git checkout origin/main -- .github/bin/dstu9112
+
+          if [ ! -f ".github/bin/dstu9112" ]; then
+            echo "Pomylka: .github/bin/dstu9112 ne znajdeno!"
+            echo "Budj laska, dodajte fajl dstu9112 do dyrektoriï tools/"
+            exit 1
+          fi
+
           chmod +x .github/bin/dstu9112
 
-          find . -type f \( -name "*.csv" -o -name "*.xml" -o -name "*.txt" -o -name "*.lua" -o -name "*.md" -o -name "*.json" -o -name "*.locale" \) -delete
+          if ! .github/bin/dstu9112 --help 2>/dev/null && ! echo "test" | .github/bin/dstu9112 > /dev/null 2>&1; then
+            echo "Poperedžennja: dstu9112 može pracjuvaty nepravyljno"
+          fi
 
-          git checkout origin/main -- .
-          
-          git reset
+      - name: Checkout or create latyn branch
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
 
-          find . -type f -not -path '*/.*' \
-          \( -name "*.csv" -o -name "*.xml" -o -name "*.txt" -o -name "*.lua" -o -name "*.md" -o -name "*.json" -o -name "*.locale" \) \
-          ! -name "dstu9112" | while read file; do
-            ./.github/bin/dstu9112 < "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
-          done
+          MAIN_COMMIT=$(git rev-parse HEAD)
+          echo "MAIN_COMMIT=$MAIN_COMMIT" >> $GITHUB_ENV
 
-          find . -type f \( -name "*.csv" -o -name "*.xml" -o -name "*.txt" -o -name "*.lua" -o -name "*.md" -o -name "*.json" -o -name "*.locale" \) | while read path; do
-            dir=$(dirname "$path")
-            base=$(basename "$path")
-            new_base=$(echo -n "$base" | ./.github/bin/dstu9112)
-            if [ "$base" != "$new_base" ]; then
-              mv "$path" "$dir/$new_base"
+          if git ls-remote --heads origin latyn | grep -q latyn; then
+            echo "Ğilka latyn vže isnuje, onovljujemo..."
+            git fetch origin latyn:latyn
+          else
+            echo "Stvorjujemo latyn..."
+            git checkout -b latyn
+            git push -u origin latyn
+            git checkout main
+          fi
+
+      - name: Transliterate files
+        run: |
+          set -e
+
+          transliterate_file() {
+            local file="$1"
+
+            if [ ! -f "$file" ]; then
+              echo "Fajl ne isnuje: $file"
+              return
+            fi
+
+            echo "Transliteracija: $file"
+
+            local temp_file="${file}.tmp"
+
+            if tools/dstu9112 < "$file" > "$temp_file" 2>/dev/null; then
+              mv "$temp_file" "$file"
+              echo "Uspišno: $file"
+            else
+              echo "Pomylka transliteraciï: $file"
+              rm -f "$temp_file"
+              return 1
+            fi
+          }
+
+          FILES_TO_TRANSLITERATE=(
+            "translation.csv"
+            "README.md"
+            "Translation Files/translation_org.csv"
+            "Translation Files/translation.csv"
+            "Steam Workshop Version/Ukrainian_Language/translation.csv"
+            "Manual Install Version/Ukrainian_Language/translation.csv"
+            "Manual Install Version/Ukrainian_Language/translation.xml"
+          )
+
+          git checkout latyn 2>/dev/null || git checkout -b latyn
+
+          echo "Kopijuvannja fajliv z main..."
+          for file in "${FILES_TO_TRANSLITERATE[@]}"; do
+            if git show "main:$file" > /dev/null 2>&1; then
+              mkdir -p "$(dirname "$file")"
+              git show "main:$file" > "$file"
             fi
           done
 
-          rm -rf .github/bin/
+          echo ""
+          echo "Počatok transliteraciï..."
+          echo ""
+
+          for file in "${FILES_TO_TRANSLITERATE[@]}"; do
+            if [ -f "$file" ]; then
+              transliterate_file "$file" || true
+            fi
+          done
+
+          echo ""
+          echo "Transliteracija zaveršena!"
+          
+      - name: Commit and push to latyn branch
+        run: |
           git add -A
 
-      - name: Commit Changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          branch: latyn
-          commit_message: "avtomatyčna transliteracija"
-          file_pattern: '.'
-          skip_dirty_check: true
+          if git diff --staged --quiet; then
+            echo "Nemaje zmin dlja komitu"
+            exit 0
+          fi
+
+          MAIN_SHORT=$(git rev-parse --short $MAIN_COMMIT)
+
+          MAIN_MESSAGE=$(git log -1 --pretty=%B $MAIN_COMMIT)
+
+          git commit -m "Avtomatyčna transliteracija z main@${MAIN_SHORT}" \
+                     -m "Oryğinaljnyj komit: ${MAIN_MESSAGE}" \
+                     -m "" \
+                     -m "Transliterovano GitHub Actions"
+
+          echo "Vidpravka zmin do origin/latyn..."
+          git push origin latyn
+          
+          echo "Uspišno onovleno ğilku latyn!"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
