@@ -72,7 +72,7 @@ jobs:
 
             local temp_file="${file}.tmp"
 
-            if tools/dstu9112 < "$file" > "$temp_file" 2>/dev/null; then
+            if .github/bin//dstu9112 < "$file" > "$temp_file" 2>/dev/null; then
               mv "$temp_file" "$file"
               echo "Uspišno: $file"
             else
