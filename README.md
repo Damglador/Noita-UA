@@ -1,27 +1,27 @@
-## Інформація
-Створення моду, затвердження перекладу, шрифти: Damglador
+## Informacija
+Stvorennja modu, zatverdžennja perekladu, šryfty: Damglador
 
-Переклад тексту: Damglador та Age_of_Dragons
+Pereklad tekstu: Damglador ta Age_of_Dragons
 
-Допомога з імплементацією шрифтів у Steam версії: dextercd
+Dopomoğa z implementacijeju šryftiv u Steam versiï: dextercd
 
-Створення нормальної підтримки перекладів у своїй грі: Nolla Games <3
-## Самореклама
-Мій Discord: damglador
+Stvorennja normaljnoï pidtrymky perekladiv u svoïj ğri: Nolla Games <3
+## Samoreklama
+Mij Discord: damglador
 
-Discord сервер для повідомлень про помилки: https://discord.gg/yEA4DmZWEY
-## Встановлення
-Якщо у вас є гра в Steam вам туди - https://steamcommunity.com/sharedfiles/filedetails/?id=2921365704
-Якщо у вас не версія гри в Steam у вас локальних файлах гри все одно має бути тека mods. Дістатися до цієї теки ви можете тицьнувши правою кнопкою миші по ярлику гри та натиснувши опцію "Відкрити розташування файлу", або "Властивості" і там теж має бути шлях.
-В Releases вибираєте останню версію, під нею є архів, завантажуєте його, в ньому 3 теки, їх треба закинути в теку mods в файлах гри. Після цього при заході в гру ви зможете в налаштуваннях вибрати українську мову.
-Якщо ви хочете також переклад елементів інтерфейсу в меню "Модифікації" буде 2 мода:
+Discord server dlja povidomlenj pro pomylky: https://discord.gg/yEA4DmZWEY
+## Vstanovlennja
+Jakŝo u vas je ğra v Steam vam tudy - https://steamcommunity.com/sharedfiles/filedetails/?id=2921365704
+Jakŝo u vas ne versija ğry v Steam u vas lokaljnyx fajlax ğry vse odno maje buty teka mods. Distatysja do cijeï teky vy možete tycjnuvšy pravoju knopkoju myši po jarlyku ğry ta natysnuvšy opciju "Vidkryty roztašuvannja fajlu", abo "Vlastyvosti" i tam tež maje buty šljax.
+V Releases vybyrajete ostannju versiju, pid neju je arxiv, zavantažujete joğo, v njomu 3 teky, ïx treba zakynuty v teku mods v fajlax ğry. Pislja cjoğo pry zaxodi v ğru vy zmožete v nalaštuvannjax vybraty ukraïnsjku movu.
+Jakŝo vy xočete takož pereklad elementiv interfejsu v menju "Modyfikaciï" bude 2 moda:
 Disable mod restrictions - disable-mod-restrictions
-Український інтерфейс - Ukrainian_HUD
-Спочатку вам треба увімкнути Unsafe mods: Allowed (Небезпечні модифікації: Дозволено) та після ці дві модифікації.
-## Подяка за переклад
-Номер: 5375411200135544 (Переказ як на картку)
+Ukraïnsjkyj interfejs - Ukrainian_HUD
+Spočatku vam treba uvimknuty Unsafe mods: Allowed (Nebezpečni modyfikaciï: Dozvoleno) ta pislja ci dvi modyfikaciï.
+## Podjaka za pereklad
+Nomer: 5375411200135544 (Perekaz jak na kartku)
 
-Посилання: https://send.monobank.ua/jar/9fYeh5mu3Y
+Posylannja: https://send.monobank.ua/jar/9fYeh5mu3Y
 
 <details>
 <summary>QR:</summary> 
