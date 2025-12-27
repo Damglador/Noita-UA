@@ -132,7 +132,7 @@ jobs:
                      -m "" \
                      -m "Transliterovano GitHub Actions"
 
-          echo "📤 Vidpravka zmin do origin/latyn..."
+          echo "Vidpravka zmin do origin/latyn..."
           git push origin latyn
           
           echo "Uspišno onovleno ğilku latyn!"
