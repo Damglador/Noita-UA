@@ -67,7 +67,7 @@ jobs:
               return
             fi
 
-            echo "🔄 Transliteracija: $source_file -> $dest_file"
+            echo "Transliteracija: $source_file -> $dest_file"
 
             mkdir -p "$(dirname "$dest_file")"
 
