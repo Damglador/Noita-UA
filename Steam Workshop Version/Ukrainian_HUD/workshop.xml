@@ -1,8 +1,0 @@
-	<Mod
-		name="Інтерфейс українською"
-		description="Перероблює елементи інтерфейсу з текстом на українську мову. Через приколи гри вимикає досягнення."
-		tags="translations, graphics"
-		dont_upload_folders=""
-		dont_upload_files=""
-	> 
-	</Mod>

@@ -1,6 +1,6 @@
 <FontData>
   <Texture>
-    ../../workshop/content/881100/2921365704/fonts/font_pixel_huge.png
+    ../../workshop/content/881100/2921365704/fonts/font_pixel_huge.png <!-- treba redağuvaty -->
   </Texture>
   <LineHeight>
     7
@@ -347,19 +347,7 @@
   </QuadChar>
   <QuadChar id="380" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="1437" rect_y="0" width="8" >
   </QuadChar>
-  <QuadChar id="1108" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2095" rect_y="0" width="8" >
-  </QuadChar>
-  <QuadChar id="1110" offset_x="0" offset_y="0" rect_h="15" rect_w="5" rect_x="349" rect_y="0" width="5" >
-  </QuadChar>
-  <QuadChar id="1111" offset_x="0" offset_y="0" rect_h="15" rect_w="4" rect_x="970" rect_y="0" width="4" >
-  </QuadChar>
   <QuadChar id="1025" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="1446" rect_y="0" width="8" >
-  </QuadChar>
-  <QuadChar id="1028" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2095" rect_y="0" width="8" >
-  </QuadChar>
-  <QuadChar id="1030" offset_x="0" offset_y="0" rect_h="15" rect_w="5" rect_x="349" rect_y="0" width="5" >
-  </QuadChar>
-  <QuadChar id="1031" offset_x="0" offset_y="0" rect_h="15" rect_w="4" rect_x="970" rect_y="0" width="4" >
   </QuadChar>
   <QuadChar id="1040" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="1455" rect_y="0" width="8" >
   </QuadChar>
@@ -506,5 +494,26 @@
   <QuadChar id="8230" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2075" rect_y="0" width="8" >
   </QuadChar>
   <QuadChar id="8734" offset_x="0" offset_y="0" rect_h="15" rect_w="10" rect_x="2084" rect_y="0" width="10" >
+  </QuadChar>
+  <!-- dodani latynsjki litery -->
+  <QuadChar id="381" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2095" rect_y="0" width="8" >
+  </QuadChar>
+  <QuadChar id="382" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2104" rect_y="0" width="8" >
+  </QuadChar>
+  <QuadChar id="268" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2113" rect_y="0" width="8" >
+  </QuadChar>
+  <QuadChar id="269" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2122" rect_y="0" width="8" >
+  </QuadChar>
+  <QuadChar id="352" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2131" rect_y="0" width="8" >
+  </QuadChar>
+  <QuadChar id="353" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2140" rect_y="0" width="8" >
+  </QuadChar>
+  <QuadChar id="348" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2149" rect_y="0" width="8" >
+  </QuadChar>
+  <QuadChar id="349" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2158" rect_y="0" width="8" >
+  </QuadChar>
+  <QuadChar id="286" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2167" rect_y="0" width="8" >
+  </QuadChar>
+  <QuadChar id="287" offset_x="0" offset_y="0" rect_h="15" rect_w="8" rect_x="2176" rect_y="0" width="8" >
   </QuadChar>
 </FontData>

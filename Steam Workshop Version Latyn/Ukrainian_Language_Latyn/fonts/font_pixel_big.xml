@@ -1,6 +1,6 @@
 <FontData>
   <Texture>
-    mods/Ukrainian_Language/fonts/font_pixel_big.png
+    ../../workshop/content/881100/2921365704/fonts/font_pixel_big.png <!-- treba redağuvaty -->
   </Texture>
   <LineHeight>
     7
@@ -347,19 +347,7 @@
   </QuadChar>
   <QuadChar id="380" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1127" rect_y="0" width="6" >
   </QuadChar>
-  <QuadChar id="1108" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1644" rect_y="0" width="6" >
-  </QuadChar>
-  <QuadChar id="1110" offset_x="0" offset_y="0" rect_h="11" rect_w="5" rect_x="267" rect_y="0" width="5" >
-  </QuadChar>
-  <QuadChar id="1111" offset_x="0" offset_y="0" rect_h="11" rect_w="5" rect_x="758" rect_y="0" width="5" >
-  </QuadChar>
   <QuadChar id="1025" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1134" rect_y="0" width="6" >
-  </QuadChar>
-  <QuadChar id="1028" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1644" rect_y="0" width="6" >
-  </QuadChar>
-  <QuadChar id="1030" offset_x="0" offset_y="0" rect_h="11" rect_w="5" rect_x="267" rect_y="0" width="5" >
-  </QuadChar>
-  <QuadChar id="1031" offset_x="0" offset_y="0" rect_h="11" rect_w="5" rect_x="758" rect_y="0" width="5" >
   </QuadChar>
   <QuadChar id="1040" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1141" rect_y="0" width="6" >
   </QuadChar>
@@ -491,10 +479,6 @@
   </QuadChar>
   <QuadChar id="1105" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1587" rect_y="0" width="6" >
   </QuadChar>
-  <QuadChar id="1168" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1651" rect_y="0" width="6" >
-  </QuadChar>
-  <QuadChar id="1169" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1651" rect_y="0" width="6" >
-  </QuadChar>
   <QuadChar id="8211" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1594" rect_y="0" width="6" >
   </QuadChar>
   <QuadChar id="8212" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1601" rect_y="0" width="6" >
@@ -510,5 +494,26 @@
   <QuadChar id="8230" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1626" rect_y="0" width="6" >
   </QuadChar>
   <QuadChar id="8734" offset_x="0" offset_y="0" rect_h="11" rect_w="10" rect_x="1633" rect_y="0" width="10" >
+  </QuadChar>
+  <!-- dodani latynsjki litery -->
+  <QuadChar id="381" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1644" rect_y="0" width="6" >
+  </QuadChar>
+  <QuadChar id="382" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1651" rect_y="0" width="6" >
+  </QuadChar>
+  <QuadChar id="268" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1658" rect_y="0" width="6" >
+  </QuadChar>
+  <QuadChar id="269" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1665" rect_y="0" width="6" >
+  </QuadChar>
+  <QuadChar id="352" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1672" rect_y="0" width="6" >
+  </QuadChar>
+  <QuadChar id="353" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1679" rect_y="0" width="6" >
+  </QuadChar>
+  <QuadChar id="348" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1686" rect_y="0" width="6" >
+  </QuadChar>
+  <QuadChar id="349" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1693" rect_y="0" width="6" >
+  </QuadChar>
+  <QuadChar id="286" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1700" rect_y="0" width="6" >
+  </QuadChar>
+  <QuadChar id="287" offset_x="0" offset_y="0" rect_h="11" rect_w="6" rect_x="1707" rect_y="0" width="6" >
   </QuadChar>
 </FontData>
