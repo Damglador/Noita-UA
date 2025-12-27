@@ -11,7 +11,6 @@ on:
       - 'Translation Files/translation.csv'
       - 'Steam Workshop Version/Ukrainian_Language/translation.csv'
       - 'Manual Install Version/Ukrainian_Language/translation.csv'
-      - 'Manual Install Version/Ukrainian_Language/translation.xml'
 
 jobs:
   transliterate:
@@ -25,17 +24,16 @@ jobs:
 
       - name: Setup dstu9112 transliterator
         run: |
-
           if [ ! -f ".github/bin/dstu9112" ]; then
             echo "Pomylka: .github/bin/dstu9112 ne znajdeno!"
-            echo "Budj laska, dodajte fajl dstu9112 do dyrektoriï tools/"
+            echo "Budj laska, dodajte fajl dstu9112 do dyrektoriï .github/bin/"
             exit 1
           fi
 
           chmod +x .github/bin/dstu9112
 
           if ! .github/bin/dstu9112 --help 2>/dev/null && ! echo "test" | .github/bin/dstu9112 > /dev/null 2>&1; then
-            echo "Poperedžennja: dstu9112 može pracjuvaty nepravyljno"
+            echo "Poperedžennja: dstu9112 mozhe pracjuvaty nepravyljno"
           fi
 
       - name: Checkout or create latyn branch
@@ -61,59 +59,61 @@ jobs:
           set -e
 
           transliterate_file() {
-            local file="$1"
+            local source_file="$1"
+            local dest_file="$2"
 
-            if [ ! -f "$file" ]; then
-              echo "Fajl ne isnuje: $file"
+            if [ ! -f "$source_file" ]; then
+              echo "Fajl ne isnuje: $source_file"
               return
             fi
 
-            echo "Transliteracija: $file"
+            echo "🔄 Transliteracija: $source_file -> $dest_file"
 
-            local temp_file="${file}.tmp"
+            mkdir -p "$(dirname "$dest_file")"
 
-            if .github/bin//dstu9112 < "$file" > "$temp_file" 2>/dev/null; then
-              mv "$temp_file" "$file"
-              echo "Uspišno: $file"
+            local temp_file="${dest_file}.tmp"
+
+            if .github/bin/dstu9112 < "$source_file" > "$temp_file" 2>/dev/null; then
+              mv "$temp_file" "$dest_file"
+              echo "Uspišno: $dest_file"
             else
-              echo "Pomylka transliteraciï: $file"
+              echo "Pomylka transliteracii: $source_file"
               rm -f "$temp_file"
               return 1
             fi
           }
 
-          FILES_TO_TRANSLITERATE=(
-            "translation.csv"
-            "README.md"
-            "Translation Files/translation_org.csv"
-            "Translation Files/translation.csv"
-            "Steam Workshop Version/Ukrainian_Language/translation.csv"
-            "Manual Install Version/Ukrainian_Language/translation.csv"
-            "Manual Install Version/Ukrainian_Language/translation.xml"
+          declare -A FILE_MAPPING=(
+            ["translation.csv"]="translation.csv"
+            ["README.md"]="README.md"
+            ["Translation Files/translation_org.csv"]="Translation Files Latyn/translation_org.csv"
+            ["Translation Files/translation.csv"]="Translation Files Latyn/translation.csv"
+            ["Steam Workshop Version/Ukrainian_Language/translation.csv"]="Steam Workshop Version Latyn/Ukrainian_Language_Latyn/translation.csv"
+            ["Manual Install Version/Ukrainian_Language/translation.csv"]="Manual Install Version Latyn/Ukrainian_Language_Latyn/translation.csv"
           )
 
           git checkout latyn 2>/dev/null || git checkout -b latyn
 
-          echo "Kopijuvannja fajliv z main..."
-          for file in "${FILES_TO_TRANSLITERATE[@]}"; do
-            if git show "main:$file" > /dev/null 2>&1; then
-              mkdir -p "$(dirname "$file")"
-              git show "main:$file" > "$file"
+          echo "Kopijuvannja ta transliteracija fajliv..."
+          echo ""
+
+          for source_file in "${!FILE_MAPPING[@]}"; do
+            dest_file="${FILE_MAPPING[$source_file]}"
+
+            if git show "main:$source_file" > /dev/null 2>&1; then
+              temp_source="/tmp/source_$(basename "$source_file")"
+              git show "main:$source_file" > "$temp_source"
+
+              transliterate_file "$temp_source" "$dest_file" || true
+
+              rm -f "$temp_source"
+            else
+              echo "Fajl ne znajdeno v main: $source_file"
             fi
           done
 
           echo ""
-          echo "Počatok transliteraciï..."
-          echo ""
-
-          for file in "${FILES_TO_TRANSLITERATE[@]}"; do
-            if [ -f "$file" ]; then
-              transliterate_file "$file" || true
-            fi
-          done
-
-          echo ""
-          echo "Transliteracija zaveršena!"
+          echo "Transliteraciju zaveršeno!"
           
       - name: Commit and push to latyn branch
         run: |
@@ -125,7 +125,6 @@ jobs:
           fi
 
           MAIN_SHORT=$(git rev-parse --short $MAIN_COMMIT)
-
           MAIN_MESSAGE=$(git log -1 --pretty=%B $MAIN_COMMIT)
 
           git commit -m "Avtomatyčna transliteracija z main@${MAIN_SHORT}" \
@@ -133,7 +132,7 @@ jobs:
                      -m "" \
                      -m "Transliterovano GitHub Actions"
 
-          echo "Vidpravka zmin do origin/latyn..."
+          echo "📤 Vidpravka zmin do origin/latyn..."
           git push origin latyn
           
           echo "Uspišno onovleno ğilku latyn!"
