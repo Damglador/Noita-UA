@@ -5,6 +5,8 @@ Pereklad tekstu: Damglador ta Age_of_Dragons
 
 Dopomoğa z implementacijeju šryftiv u Steam versiï: dextercd
 
+Latynsjka versija lokalizaciï: [KVarnitZ](https://github.com/KVarnitZ)
+
 Stvorennja normaljnoï pidtrymky perekladiv u svoïj ğri: Nolla Games <3
 ## Samoreklama
 Mij Discord: damglador
