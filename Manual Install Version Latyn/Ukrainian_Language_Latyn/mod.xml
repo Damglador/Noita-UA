@@ -1,0 +1,15 @@
+<Mod
+	name="Ukraïnizator"
+	description="Ukraïnsjkyj pereklad dlja ğry."
+	tags="translations"
+	request_no_api_restrictions="0" 
+	is_translation="1"
+	translation_xml_path="mods/Ukrainian_Language_Latyn/translation.xml"
+	translation_csv_path="mods/Ukrainian_Language_Latyn/translation.csv"
+> 
+</Mod>
+
+<!-- 
+	'is_translation="1"' turns of normal mod functionality, 
+	but makes the mod display under Language in the Options menu. 
+-->
