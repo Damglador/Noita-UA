@@ -5,6 +5,8 @@
 
 Допомога з імплементацією шрифтів у Steam версії: dextercd
 
+Латинська версія локалізації: [KVarnitZ](https://github.com/KVarnitZ)
+
 Створення нормальної підтримки перекладів у своїй грі: Nolla Games <3
 ## Самореклама
 Мій Discord: damglador
